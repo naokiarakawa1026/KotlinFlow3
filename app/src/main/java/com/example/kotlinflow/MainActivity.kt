@@ -30,12 +30,30 @@ class MainActivity : AppCompatActivity() {
 
         // simple flow
         CoroutineScope(Dispatchers.IO).launch {
-
            // collectはsuspend関数であるため、コルーチン内で実行する
            // パラメータとしてラムダを受け取り、新しい値ごとに呼び出される
-           simpleFlow().collect { user ->
-               Log.d(TAG, user + "flow")
-           }
+//           simpleFlow().collect { user ->
+//               Log.d(TAG, user + "flow1")
+//           }
+
+            //  Flowをlaunchで囲むことによって、flow1, flow2, flow3が同時に処理される
+            launch {
+                simpleFlow().collect { user ->
+                    Log.d(TAG, user + "flow1")
+                }
+            }
+
+            launch {
+                simpleFlow().collect { user ->
+                    Log.d(TAG, user + "flow2")
+                }
+            }
+
+            launch {
+                simpleFlow().collect { user ->
+                    Log.d(TAG, user + "flow3")
+                }
+            }
         }
     }
 
