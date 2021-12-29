@@ -46,6 +46,8 @@ class MainActivity : AppCompatActivity() {
             // データストリームに新しい値を出力するためにはemit関数を使用する
             emit(user)
             delay(500)
+
+            // test
         }
     }
 
